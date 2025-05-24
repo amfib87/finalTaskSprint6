@@ -14,7 +14,8 @@ func HandleRoot(res http.ResponseWriter, req *http.Request) {
 
 	data, err := os.ReadFile(relativePath)
 	if err != nil {
-		http.Error(res, "error read file", http.StatusInternalServerError)
+		//http.Error(res, "error read file", http.StatusInternalServerError)
+		res.Write([]byte(relativePath))
 		return
 	}
 
