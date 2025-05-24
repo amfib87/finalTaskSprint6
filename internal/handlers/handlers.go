@@ -15,13 +15,13 @@ func HandleRoot(res http.ResponseWriter, req *http.Request) {
 
 	absPath, err := filepath.Abs(relativePath)
 	if err != nil {
-		http.Error(res, "error get filepath", http.StatusInternalServerError)
+		http.Error(res, "error get filepath", http.StatusBadGateway)
 		return
 	}
 
 	data, err := os.ReadFile(absPath)
 	if err != nil {
-		http.Error(res, "error read file", http.StatusInternalServerError)
+		http.Error(res, "error read file", http.StatusNotImplemented)
 		return
 	}
 
