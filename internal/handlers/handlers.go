@@ -22,7 +22,7 @@ func HandleRoot(res http.ResponseWriter, req *http.Request) {
 	data, err := os.ReadFile(absPath)
 	if err != nil {
 		//http.Error(res, "error read file", http.StatusNotImplemented)
-		res.Write([]byte(absPath))
+		res.Header().Set("Content-Type", absPath)
 		return
 	}
 
