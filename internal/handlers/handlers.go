@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"bufio"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -16,7 +15,8 @@ func HandleRoot(res http.ResponseWriter, req *http.Request) {
 
 	absPath, err := filepath.Abs(relativePath)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	data, err := os.ReadFile(absPath)
