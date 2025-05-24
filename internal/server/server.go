@@ -16,8 +16,8 @@ type Server struct {
 func CreateRouter(logInput *log.Logger) *Server {
 	myRouter := http.NewServeMux()
 
-	myRouter.HandleFunc("/", handlers.HandleRoot)
-	myRouter.HandleFunc("/upload", handlers.HandleUpload)
+	myRouter.HandleFunc("GET /", handlers.HandleRoot)
+	myRouter.HandleFunc("POST /upload", handlers.HandleUpload)
 
 	var serv = Server{
 		Log: *logInput,
