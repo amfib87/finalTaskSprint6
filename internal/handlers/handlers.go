@@ -4,18 +4,23 @@ import (
 	"bufio"
 	"net/http"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/service"
 )
 
 func HandleRoot(res http.ResponseWriter, req *http.Request) {
-	relativePath := "../index.html"
+	abs, err := filepath.Abs("../index.html")
+	if err != nil {
+		http.Error(res, "error read file", http.StatusInternalServerError)
+		return
+	}
 
-	data, err := os.ReadFile(relativePath)
+	data, err := os.ReadFile(abs)
 	if err != nil {
 		//http.Error(res, "error read file", http.StatusInternalServerError)
-		res.Header().Set("Content-Type", relativePath)
+		res.Header().Set("Content-Type", abs)
 		return
 	}
 
